@@ -1,0 +1,35 @@
+# Define the services/containers to be run
+version: '2'
+
+services:
+ springboot :
+  image : yashvijaydocker/springboot-mongodb:YV161117
+  depends_on : 
+  - database
+  container_name: springboot_service
+  environment :
+   spring.data.mongodb.uri : mongodb://mongodb:27017/local
+  networks :
+   - yash-network
+
+ database:
+   image : mongo
+   container_name : mongodb
+   ports :
+    - "27017:27017"
+   networks :
+    - yash-network
+
+ frontend:
+  image : yashvijaydocker/angular-cli-project:YV171117
+  depends_on :
+  - springboot
+  container_name: angular_2
+  ports :
+  - "4200:4200"
+  networks :
+   - yash-network
+
+networks :
+ yash-network :
+  driver : bridge

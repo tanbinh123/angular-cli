@@ -11,22 +11,14 @@ import { LoginDetails } from './loginDetails';
 export class AppComponent implements OnInit {
   title = 'app';
   allDetails : LoginDetails[];
-  status;
-  message : string;
+  status : string;
 
   constructor(private appService: AppService) { }
 
   ngOnInit() : void {
-    this.getWelcomeMessage();
+    this.getAllDetails();
   }
 
-
-  getWelcomeMessage() {
-    this.appService.getWelcomeMessage()
-     .subscribe(
-                data => this.message = data,
-                error => this.status = error);   
-   }
 
   getAllDetails() {
     this.appService.getAllDetails()
